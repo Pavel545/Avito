@@ -1,20 +1,26 @@
+import { NavLink } from "react-router-dom";
 
-export function Card() {
+export function Card({element}) {
+  
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__image">
-          <a href="#" target="_blank">
-            <img src="#" alt="picture" />
-          </a>
+          <NavLink to="/article">
+          {element.images[0] ?<img src={`http://localhost:8090/${element.images[0]['url']}`} alt="picture" />:<img src='' alt="Фотография отсутствует" />}
+
+          </NavLink>
+          {/* <a href="#" target="_blank">
+          </a> */}
         </div>
         <div className="card__content">
           <a href="" target="_blank">
             <h3 className="card__title">
-              Ракетка для большого тенниса Triumph Pro ST
+              {element.title}
             </h3>
           </a>
-          <p className="card__price">2&nbsp;200&nbsp;₽</p>
+          <p className="card__price">{element.price}&nbsp;₽</p> 
+          {/* 2&nbsp;200&nbsp; */}
           <p className="card__place">Санкт Петербург</p>
           <p className="card__date">Сегодня в&nbsp;10:45</p>
         </div>
