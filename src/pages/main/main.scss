@@ -576,6 +576,10 @@ a {
     }
 
 }
-
+@media screen and (max-width: 768px){
+    .main__search {
+    display: none;
+}
+}
 
 

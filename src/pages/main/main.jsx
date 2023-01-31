@@ -7,29 +7,29 @@ import { useEffect, useRef, useState } from "react";
 import "./main.scss";
 import { allCard } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
+import { SigninJSX } from "../../components/modal/signin/signin";
+import { SignupJSX } from "../../components/modal/signin/signup";
 
 export function Main() {
-  const filter = useRef(null)
-  const [mass, setMass]=useState(null)
-  const [value, setValue]=useState('')
+  const [active, setActive] = useState(false);
+  const filter = useRef(null);
+  const [mass, setMass] = useState(null);
+  const [value, setValue] = useState("");
+  const [reg, setReg] = useState(false);
+
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (mass===null) {
-      dispatch(
-        allCard()
-      );
+    if (mass === null) {
+      dispatch(allCard());
     }
-    
-    setMass(data.all)
 
-    
+    setMass(data.all);
   }, [data]);
-  useEffect(()=>{
-    console.log(mass);
-  },[])
+  if (mass === null) {
+    return "Loading...";
+  }
 
-  
   return (
     <div className="wrapper">
       <div className="container">
@@ -38,6 +38,7 @@ export function Main() {
             <button
               className="header__btn-main-enter btn-hov01"
               id="btnMainEnter"
+              onClick={() => setActive(true)}
             >
               Вход в личный кабинет
             </button>
@@ -45,12 +46,12 @@ export function Main() {
         </header>
         <main className="main">
           <div className="main__search search">
-            <Logo/>
-            
-            <div className="search__form" >
+            <Logo />
+
+            <div className="search__form">
               <input
                 ref={filter}
-                onChange={(event)=>setValue(event.target.value)}
+                onChange={(event) => setValue(event.target.value)}
                 className="search__text"
                 type="search"
                 placeholder="Поиск по объявлениям"
@@ -70,22 +71,21 @@ export function Main() {
 
             <div className="main__content">
               <div className="content__cards cards">
-              {data.all[0] ? <Gallery mass={mass} value={value} />:''}
-                
+                {data.all[0] ? <Gallery mass={mass} value={value} /> : ""}
               </div>
             </div>
           </div>
         </main>
+        <SigninJSX reg={reg} setReg={setReg} active={active} setActive={setActive} />:
+        <SignupJSX reg={reg} setReg={setReg} />
         <Footer />
       </div>
     </div>
   );
 }
-const Gallery =({value,mass})=>{
-  const filterMass =mass.filter(element=>{
-    return element.title.toLowerCase().includes(value.toLowerCase())
-  })
-  return(
-    filterMass.map((element,id) => <Card key={id} element={element} />)
-  )
-}
+const Gallery = ({ value, mass }) => {
+  const filterMass = mass.filter((element) => {
+    return element.title.toLowerCase().includes(value.toLowerCase());
+  });
+  return filterMass.map((element, id) => <Card key={id} element={element} />);
+};

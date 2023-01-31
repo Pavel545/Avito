@@ -1,25 +1,50 @@
+import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { Card } from "../../components/card/card";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
+import { allSeller } from "../../store/actions/thunk/todo";
+import { todosSelector } from "../../store/selectors/todo";
 import "./sellerProfile.scss";
 
-export function SellerProfile(params) {
+export function SellerProfile() {
+  const params = useParams();
+  const data = useSelector(todosSelector);
+  const dispatch = useDispatch();
+  const [sel, setSel] = useState(undefined);
+  const [chek, setChek]=useState()
+  useEffect(() => {
+    dispatch(allSeller());
+    setSel(data.seller[params.id - 1]);
+  }, [dispatch]);
+  useEffect(() => {
+    setSel(data.seller[params.id - 1]);
+  }, [data]);
+  if (!data.seller) {
+    return "Loading...";
+  }
+  if (sel===undefined) {
+    return "Loading...";
+  }
+  console.log(sel);
   return (
     <div className="wrapper">
       <div className="container">
-        <Header/>
+        <Header />
 
         <main className="main">
           <div className="main__container">
             <div className="main__center-block">
               <div className="main__menu menu">
-                <Logo/>
-                <form className="menu__form" action="#">
-                  <button className="menu__btn btn-hov02" id="btnGoBack">
-                    Вернуться на&nbsp;главную
-                  </button>
-                </form>
+                <Logo />
+                <button className="menu__btn btn-hov02" id="btnGoBack">
+                  <Link style={{ color: "inherit" }} to="/">
+                    Вернуться на главную
+                  </Link>
+                </button>
               </div>
 
               <h2 className="main__h2">Профиль продавца</h2>
@@ -35,10 +60,10 @@ export function SellerProfile(params) {
                       </div>
                     </div>
                     <div className="seller__right">
-                      <h3 className="seller__title">Кирилл Матвеев</h3>
-                      <p className="seller__city">Санкт-Петербург</p>
+                      <h3 className="seller__title">{sel.name}</h3>
+                      <p className="seller__city">{sel.city}</p>
                       <p className="seller__inf">
-                        Продает товары с августа 2021
+                        Продает товары с 
                       </p>
 
                       <div className="seller__img-mob-block">
@@ -49,10 +74,21 @@ export function SellerProfile(params) {
                         </div>
                       </div>
 
-                      <button className="seller__btn btn-hov02">
-                        Показать&nbsp;телефон
-                        <span>8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ</span>
-                      </button>
+                      <button
+                    onClick={() => setChek(!chek)}
+                    className="article__btn btn-hov02"
+                  >
+                    Показать телефон
+                    {!chek ? (
+                      <span> 8 905 XXX XX XX</span>
+                    ) : (
+                      <span>
+                        {String(sel.phone).split(
+                          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+                        )}
+                      </span>
+                    )}
+                  </button>
                     </div>
                   </div>
                 </div>
@@ -62,7 +98,9 @@ export function SellerProfile(params) {
             </div>
             <div className="main__content">
               <div className="content__cards cards">
-                <Card />
+                {data.all.map((element,id) => {if (element.user.id===sel.id) {
+                  return <Card key={id} element={element} />
+                } })}
               </div>
             </div>
           </div>

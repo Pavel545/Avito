@@ -1,104 +1,125 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
-import './article.scss'
+import { certainCard } from "../../store/actions/thunk/todo";
+import { todosSelector } from "../../store/selectors/todo";
+import "./article.scss";
 
-export function Article(params) {
+export function Article() {
+  const params = useParams();
 
+  const [chek, setChek] = useState(false);
+  const data = useSelector(todosSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(certainCard({ id: params.id }));
+  }, [dispatch, params.id]);
+  if (!data.current) {
+    return "Loading...";
+  }
+  if (!data.current.user) {
+    return "Loading...";
+  }
+  return (
+    <div className="wrapper">
+      <div className="container">
+        <Header />
 
-    return(
-        <div className="wrapper">
-        <div className="container">
-            <Header/>
+        <main className="main">
+          <div className="main__container">
+            <div className="main__menu menu">
+              <Logo />
+              <button className="menu__btn-serch btn-hov02" id="btnGoBack">
+                <Link style={{ color: "inherit" }} to="/">
+                  Вернуться на главную
+                </Link>
+              </button>
+            </div>
+          </div>
 
-            <main className="main">
-                
-                <div className="main__container">
-                    <div className="main__menu menu">
-                        <Logo/>
-                        <form className="menu__form" action="#">                            
-                            <button className="menu__btn-serch btn-hov02" id="btnGoBack">Вернуться на главную</button>
-                        </form>                    
-                    </div>                    
+          <div className="main__artic artic">
+            <div className="artic__content article">
+              <div className="article__left">
+                <div className="article__fill-img">
+                  <div className="article__img">
+                    {data.current.images[0] ? (
+                      <img
+                        src={`http://localhost:8090/${data.current.images[0]["url"]}`}
+                        alt=""
+                      />
+                    ) : (
+                      <img src="" alt="Фотография отсутствует" />
+                    )}
+                  </div>
+                  <div className="article__img-bar"></div>
+                  <div className="article__img-bar-mob img-bar-mob">
+                    <div className="img-bar-mob__circle circle-active"></div>
+                    <div className="img-bar-mob__circle"></div>
+                    <div className="img-bar-mob__circle"></div>
+                    <div className="img-bar-mob__circle"></div>
+                    <div className="img-bar-mob__circle"></div>
+                  </div>
                 </div>
-
-                    <div className="main__artic artic">
-                        <div className="artic__content article">                           
-                            <div className="article__left">
-                                <div className="article__fill-img">
-                                    <div className="article__img">                                        
-                                            <img src="" alt=""/>                                        
-                                    </div>                                    
-                                    <div className="article__img-bar">
-                                        <div className="article__img-bar-div">
-                                            <img src="" alt=""/>
-                                        </div>
-                                        <div className="article__img-bar-div">
-                                            <img src="" alt=""/>
-                                        </div>
-                                        <div className="article__img-bar-div">
-                                            <img src="" alt=""/>
-                                        </div>
-                                        <div className="article__img-bar-div">
-                                            <img src="" alt=""/>
-                                        </div>
-                                        <div className="article__img-bar-div">
-                                            <img src="" alt=""/>
-                                        </div>
-                                        <div className="article__img-bar-div">
-                                            <img src="" alt=""/>
-                                        </div>
-                                    </div>
-                                    <div className="article__img-bar-mob img-bar-mob">
-                                        <div className="img-bar-mob__circle circle-active"></div>
-                                        <div className="img-bar-mob__circle"></div>
-                                        <div className="img-bar-mob__circle"></div>
-                                        <div className="img-bar-mob__circle"></div>
-                                        <div className="img-bar-mob__circle"></div>
-                                    </div>
-                                </div>                                
-                            </div>
-                            <div className="article__right">
-                                <div className="article__block">
-                                    <h3 className="article__title title">Ракетка для большого тенниса Triumph Pro STС Б/У</h3>
-                                    <div className="article__info">
-                                        <p className="article__date">Сегодня в 10:45</p>
-                                        <p className="article__city">Санкт-Петербург</p>
-                                        <a className="article__link" href="" target="_blank" rel="">23 отзыва</a>
-                                    </div>
-                                    <p className="article__price">2 200 ₽</p>
-                                    <button className="article__btn btn-hov02" >Показать&nbsp;телефон 
-                                        <span>8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ</span>
-                                    </button>
-                                    <div className="article__author author">
-                                        <div className="author__img">
-                                            <img src="" alt=""/>
-                                        </div>
-                                        <div className="author__cont">
-                                            <p className="author__name">Кирилл</p>
-                                            <p className="author__about">Продает товары с августа 2021</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              </div>
+              <div className="article__right">
+                <div className="article__block">
+                  <h3 className="article__title title">{data.current.title}</h3>
+                  <div className="article__info">
+                    <p className="article__date">
+                      {new Date(data.current.created_on).toUTCString()}
+                    </p>
+                    <p className="article__city">Санкт-Петербург</p>
+                    <a className="article__link" href="" target="_blank" rel="">
+                      23 отзыва
+                    </a>
+                  </div>
+                  <p className="article__price">{data.current.price} ₽</p>
+                  <button
+                    onClick={() => setChek(!chek)}
+                    className="article__btn btn-hov02"
+                  >
+                    Показать телефон
+                    {!chek ? (
+                      <span> 8 905 XXX XX XX</span>
+                    ) : (
+                      <span>
+                        {String(data.current.user.phone).split(
+                          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+                        )}
+                      </span>
+                    )}
+                  </button>
+                  <div className="article__author author">
+                    <div className="author__img">
+                      <img src="" alt="" />
                     </div>
-
-                <div className="main__container">
-                    <h3 className="main__title title">
-                        Описание товара
-                    </h3>
-                    <div className="main__content">
-                        <p className="main__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                                
+                    <div className="author__cont">
+                      <NavLink to={`/seller_profile/${data.current.user.id}`}>
+                        <p className="author__name">{data.current.user.name}</p>
+                      </NavLink>
+                      <p className="author__about">
+                        Продает товары с {data.current.user.sells_from}
+                      </p>
                     </div>
-                    
+                  </div>
                 </div>
-                
-            </main>
-            
-            <Footer/>
-        </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="main__container">
+            <h3 className="main__title title">Описание товара</h3>
+            <div className="main__content">
+              <p className="main__text">{data.current.description}</p>
+            </div>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
     </div>
-    )
+  );
 }
