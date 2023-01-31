@@ -92,7 +92,9 @@ export default function todoReducer(state = initialState, action) {
           error: null,
   
           todos: {
-            ...state,
+            all: [...state.todos.all],
+            seller: [...state.todos.seller],
+            user:{...action.payload.todos.user}
           },
         };
       case ALL_SELLER_SUCCESS:

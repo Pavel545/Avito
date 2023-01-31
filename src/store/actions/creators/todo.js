@@ -33,8 +33,13 @@ export const userRequestSuccess = (todos) => ({
     },
   },
 });
-export const userRegisterSuccess = () => ({
+export const userRegisterSuccess = (todos) => ({
   type: USER_REGISTER_SUCCESS,
+  payload: {
+    todos: {
+      user: todos,
+    },
+  },
 });
 export const certainCardSuccess = (todos) => ({
   type: CERTAIN_CARD_SUCCESS,

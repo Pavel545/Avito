@@ -7,15 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import "./main.scss";
 import { allCard } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
-import { SigninJSX } from "../../components/modal/signin/signin";
-import { SignupJSX } from "../../components/modal/signin/signup";
+import { EntrProfile } from "../../components/entrance_profile";
 
 export function Main() {
-  const [active, setActive] = useState(false);
   const filter = useRef(null);
   const [mass, setMass] = useState(null);
   const [value, setValue] = useState("");
-  const [reg, setReg] = useState(false);
 
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
@@ -35,13 +32,7 @@ export function Main() {
       <div className="container">
         <header className="header">
           <nav className="header__nav">
-            <button
-              className="header__btn-main-enter btn-hov01"
-              id="btnMainEnter"
-              onClick={() => setActive(true)}
-            >
-              Вход в личный кабинет
-            </button>
+           <EntrProfile/>
           </nav>
         </header>
         <main className="main">
@@ -76,8 +67,7 @@ export function Main() {
             </div>
           </div>
         </main>
-        <SigninJSX reg={reg} setReg={setReg} active={active} setActive={setActive} />:
-        <SignupJSX reg={reg} setReg={setReg} />
+        
         <Footer />
       </div>
     </div>

@@ -1,8 +1,11 @@
+import { useDispatch } from "react-redux";
+import { UserRegister } from "../../../store/actions/thunk/todo";
 import "./signin.scss";
 import "./signup.scss";
 
 export function SignupJSX({ reg, setReg }) {
   console.log(reg);
+  const dispatch = useDispatch()
     const Register={
         "password": "string",
         "role": "user",
@@ -15,6 +18,8 @@ export function SignupJSX({ reg, setReg }) {
       }
       const RegUp=()=>{
         console.log(Register);
+        dispatch(UserRegister(Register))
+        setReg(false)
       }
   return (
     <div

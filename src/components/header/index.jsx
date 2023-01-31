@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { EntrProfile } from "../entrance_profile";
 import './style.scss'
 export function Header(params) {
   return (
@@ -16,9 +17,10 @@ export function Header(params) {
         <button className="header_no_main__btn-putAd btn-hov01" id="btputAd">
           Разместить объявление
         </button>
-        <button className="header_no_main__btn-lk btn-hov01" id="btnlk">
-          Личный кабинет
-        </button>
+        {/* <div className="header_no_main__btn-lk btn-hov01">
+          
+        </div> */}
+        <EntrProfile/>
       </nav>
     </header>
   );

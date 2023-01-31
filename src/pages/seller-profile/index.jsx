@@ -15,7 +15,7 @@ export function SellerProfile() {
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   const [sel, setSel] = useState(undefined);
-  const [chek, setChek]=useState()
+  const [chek, setChek] = useState();
   useEffect(() => {
     dispatch(allSeller());
     setSel(data.seller[params.id - 1]);
@@ -26,7 +26,7 @@ export function SellerProfile() {
   if (!data.seller) {
     return "Loading...";
   }
-  if (sel===undefined) {
+  if (sel === undefined) {
     return "Loading...";
   }
   console.log(sel);
@@ -40,11 +40,13 @@ export function SellerProfile() {
             <div className="main__center-block">
               <div className="main__menu menu">
                 <Logo />
-                <button className="menu__btn btn-hov02" id="btnGoBack">
-                  <Link style={{ color: "inherit" }} to="/">
-                    Вернуться на главную
-                  </Link>
-                </button>
+                <div className="menu__form">
+                  <button className="menu__btn btn-hov02" id="btnGoBack">
+                    <Link style={{ color: "inherit" }} to="/">
+                      Вернуться на главную
+                    </Link>
+                  </button>
+                </div>
               </div>
 
               <h2 className="main__h2">Профиль продавца</h2>
@@ -55,16 +57,17 @@ export function SellerProfile() {
                     <div className="seller__left">
                       <div className="seller__img">
                         <a href="" target="_self">
-                          <img src="#" alt="" />
+                          <img
+                            src={`http://localhost:8090/${sel.avatar}`}
+                            alt=""
+                          />
                         </a>
                       </div>
                     </div>
                     <div className="seller__right">
                       <h3 className="seller__title">{sel.name}</h3>
                       <p className="seller__city">{sel.city}</p>
-                      <p className="seller__inf">
-                        Продает товары с 
-                      </p>
+                      <p className="seller__inf">Продает товары с {sel.sells_from}</p>
 
                       <div className="seller__img-mob-block">
                         <div className="seller__img-mob">
@@ -75,20 +78,20 @@ export function SellerProfile() {
                       </div>
 
                       <button
-                    onClick={() => setChek(!chek)}
-                    className="article__btn btn-hov02"
-                  >
-                    Показать телефон
-                    {!chek ? (
-                      <span> 8 905 XXX XX XX</span>
-                    ) : (
-                      <span>
-                        {String(sel.phone).split(
-                          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+                        onClick={() => setChek(!chek)}
+                        className="article__btn btn-hov02"
+                      >
+                        Показать телефон
+                        {!chek ? (
+                          <span> 8 905 XXX XX XX</span>
+                        ) : (
+                          <span>
+                            {String(sel.phone).split(
+                              /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+                            )}
+                          </span>
                         )}
-                      </span>
-                    )}
-                  </button>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -98,9 +101,11 @@ export function SellerProfile() {
             </div>
             <div className="main__content">
               <div className="content__cards cards">
-                {data.all.map((element,id) => {if (element.user.id===sel.id) {
-                  return <Card key={id} element={element} />
-                } })}
+                {data.all.map((element, id) => {
+                  if (element.user.id === sel.id) {
+                    return <Card key={id} element={element} />;
+                  }
+                })}
               </div>
             </div>
           </div>

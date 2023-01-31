@@ -32,11 +32,13 @@ export function Article() {
           <div className="main__container">
             <div className="main__menu menu">
               <Logo />
-              <button className="menu__btn-serch btn-hov02" id="btnGoBack">
-                <Link style={{ color: "inherit" }} to="/">
-                  Вернуться на главную
-                </Link>
-              </button>
+              <div className="menu__form">
+                <button className="menu__btn-serch btn-hov02" id="btnGoBack">
+                  <Link style={{ color: "inherit" }} to="/">
+                    Вернуться на главную
+                  </Link>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -94,7 +96,10 @@ export function Article() {
                   </button>
                   <div className="article__author author">
                     <div className="author__img">
-                      <img src="" alt="" />
+                      <img
+                        src={`http://localhost:8090/${data.current.user.avatar}`}
+                        alt=""
+                      />
                     </div>
                     <div className="author__cont">
                       <NavLink to={`/seller_profile/${data.current.user.id}`}>
