@@ -14,7 +14,6 @@ export function SignupJSX({ reg, setReg }) {
         "surname": "string",
         "phone": "string",
         "city": "string",
-        "id": 0
       }
       const RegUp=()=>{
         console.log(Register);

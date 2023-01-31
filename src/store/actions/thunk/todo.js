@@ -65,12 +65,23 @@ export const UserToken = ({logPas}) => async (dispatch) => {
 };
 export const UserRegister = ({logPas}) => async (dispatch) => {
   dispatch(userRequestStarted());
-
   try {
-    const { data } = await axios({
-      method: 'post',
-      url:`${BASE_URL}/auth/register`,
-      logPas,
+    const { data } = await axios.post(
+    `${BASE_URL}/auth/register`,
+    JSON.stringify(logPas),
+    {
+      headers:{
+        "Content-Type":"application/json"
+      }
+    }
+  )
+    console.log(data);
+    dispatch(userRegisterSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailure(error));
+  }
+};
+
       // data:{
       //   password: logPas.password,
       //   role: logPas.role,
@@ -79,12 +90,4 @@ export const UserRegister = ({logPas}) => async (dispatch) => {
       //   surname: logPas.surname,
       //   phone: logPas.phone,
       //   city: logPas.city,
-      //   id: 0
       // },
-    });
-    console.log(data);
-    dispatch(userRegisterSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};

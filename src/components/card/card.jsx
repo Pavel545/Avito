@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import  "./style.scss";
 export function Card({ element }) {
   return (
     <div className="cards__item">
