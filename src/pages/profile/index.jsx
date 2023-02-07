@@ -43,7 +43,7 @@ export function Profile() {
                     <div className="settings__left">
                       <div className="settings__img">
                         <a href="" target="_self">
-                          <img src="#" alt="" />
+                          <img src={`http://localhost:8090/${data.user.avatar[0]["url"]}`} alt="" />
                         </a>
                       </div>
                       <a
@@ -120,7 +120,7 @@ export function Profile() {
             </div>
             <div className="main__content">
               <div className="content__cards cards">
-                {/* <Card/>                  */}
+                {/* <Card key={id} element={element} />                  */}
               </div>
             </div>
           </div>
