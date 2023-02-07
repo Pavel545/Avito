@@ -5,15 +5,16 @@ import {
   CERTAIN_CARD_SUCCESS,
   ALL_SELLER_SUCCESS,
   USER_REQUEST_FAILURE,
-USER_REQUEST_SUCCESS,
-USER_REQUEST_STARTED,
-USER_REGISTER_SUCCESS,
+  USER_REQUEST_SUCCESS,
+  USER_REQUEST_STARTED,
+  USER_REGISTER_SUCCESS,
+  USER_TOKENS_SUCCESS,
 } from "../actions/types/todo";
 
 const initialState = {
   loading: false,
   error: null,
-  todos: { all: [],current:{}, seller: [], user:{}},//, pages: [], author: [], location: []
+  todos: { all: [], current: {}, seller: [], user: {} },
 };
 
 export default function todoReducer(state = initialState, action) {
@@ -57,10 +58,11 @@ export default function todoReducer(state = initialState, action) {
         todos: {
           all: [...action.payload.todos.all],
           seller: [...state.todos.seller],
-          user:{...state.todos.user}
+          user: { ...state.todos.user },
+          // tokens:{...state.todos.tokens}
         },
       };
-      case USER_REQUEST_SUCCESS:
+    case USER_TOKENS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -69,10 +71,11 @@ export default function todoReducer(state = initialState, action) {
         todos: {
           all: [...state.todos.all],
           seller: [...state.todos.seller],
-          user:{...action.payload.todos.user}
+          user: { ...state.todos.user },
+          tokens: { ...action.payload.todos.tokens },
         },
       };
-      case CERTAIN_CARD_SUCCESS:
+    case CERTAIN_CARD_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -80,24 +83,26 @@ export default function todoReducer(state = initialState, action) {
 
         todos: {
           all: [...state.todos.all],
-          current:{...action.payload.todos.current},
+          current: { ...action.payload.todos.current },
           seller: [...state.todos.seller],
-          user:{...state.todos.user},
+          user: { ...state.todos.user },
         },
       };
-      case USER_REGISTER_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          error: null,
-  
-          todos: {
-            all: [...state.todos.all],
-            seller: [...state.todos.seller],
-            user:{...action.payload.todos.user}
-          },
-        };
-      case ALL_SELLER_SUCCESS:
+    case USER_REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+
+        todos: {
+          all: [...state.todos.all],
+          seller: [...state.todos.seller],
+          tokens: { ...state.todos.tokens },
+
+          user: { ...action.payload.todos.user },
+        },
+      };
+    case ALL_SELLER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -106,8 +111,8 @@ export default function todoReducer(state = initialState, action) {
         todos: {
           all: [...state.todos.all],
           seller: [...action.payload.todos.seller],
-          user:{...state.todos.user},
-
+          user: { ...state.todos.user },
+          // tokens:{...state.todos.tokens}
         },
       };
 

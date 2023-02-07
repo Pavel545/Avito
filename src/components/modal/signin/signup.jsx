@@ -1,25 +1,40 @@
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { UserRegister } from "../../../store/actions/thunk/todo";
+import { todosSelector } from "../../../store/selectors/todo";
 import "./signin.scss";
 import "./signup.scss";
 
 export function SignupJSX({ reg, setReg }) {
   console.log(reg);
   const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const data = useSelector(todosSelector);
+
     const Register={
-        "password": "string",
-        "role": "user",
-        "email": "user@example.com",
-        "name": "string",
-        "surname": "string",
-        "phone": "string",
-        "city": "string",
+        password: "string",
+        role: "user",
+        email: "user@example.com",
+        name: "string",
+        surname: "string",
+        phone: "string",
+        city: "string",
       }
+
+
+      const a =UserRegister(Register)
       const RegUp=()=>{
         console.log(Register);
-        dispatch(UserRegister(Register))
+        a(dispatch)
         setReg(false)
+        
       }
+      useEffect(()=>{
+        if (data.tokens) {
+          navigate("/profile");
+        }
+      },[data.tokens])
   return (
     <div
       onClick={() => setReg(false)}

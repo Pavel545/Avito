@@ -12,7 +12,7 @@ export function Card({ element }) {
                 alt="picture"
               />
             ) : (
-              <img src="" alt="Фотография отсутствует" />
+              <img src={process.env.PUBLIC_URL + "/not_photos.jpg"} alt="Фотография отсутствует" />
             )}
           </NavLink>
           {/* <a href="#" target="_blank">

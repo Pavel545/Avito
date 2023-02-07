@@ -3,29 +3,23 @@ import { UserToken } from "../../../store/actions/thunk/todo";
 
 import { useDispatch } from "react-redux";
 import "./signin.scss";
-import { useRef } from "react";
 
 
 
 export function SigninJSX({ active, setActive,reg,setReg }) {
-  const log = useRef()
-  const pass = useRef()
 
 
   let logPas =
     {
-      "email": "user@example.com",
-      "password": "string"
+      email: "user@example.com",
+      password: "string"
     }
   
   const dispatch = useDispatch();
-  
+  const loginIn = UserToken(logPas)
   const logIn=(e)=>{
     e.preventDefault()
-console.log('Отправка данных');
-    logPas.email=log.current.value
-    logPas.password=pass.current.value
-    dispatch(UserToken(logPas));
+    loginIn(dispatch);
 
   }
   return (
@@ -47,17 +41,18 @@ console.log('Отправка данных');
                 className="modal__input login"
                 type="text"
                 name="login"
-                ref={log}
                 placeholder="email"
                 required
+                onChange={(e) => (logPas.email = e.target.value)}
               />
               <input
                 className="modal__input password"
                 type="password"
                 name="password"
-                ref={pass}
                 placeholder="Пароль"
                 required
+                onChange={(e) => (logPas.password = e.target.value)}
+
               />
               <button className="modal__btn-enter" id="btnEnter">
                 <a>Войти</a>{" "}

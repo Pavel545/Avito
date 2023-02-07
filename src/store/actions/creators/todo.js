@@ -8,6 +8,7 @@ import {
   USER_REQUEST_SUCCESS,
   USER_REQUEST_STARTED,
   USER_REGISTER_SUCCESS,
+  USER_TOKENS_SUCCESS,
 } from "../types/todo";
 
 export const allRequestStarted = () => ({
@@ -25,11 +26,11 @@ export const allCardSuccess = (todos) => ({
     },
   },
 });
-export const userRequestSuccess = (todos) => ({
-  type: USER_REQUEST_SUCCESS,
+export const userTokensSuccess = (todos) => ({
+  type: USER_TOKENS_SUCCESS,
   payload: {
     todos: {
-      user: todos,
+      tokens: todos,
     },
   },
 });
