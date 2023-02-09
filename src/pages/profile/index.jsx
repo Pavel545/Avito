@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "../../components/card/card";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
-import { UserLoginin } from "../../store/actions/thunk/todo";
+import { UserLoginin, UserPatch } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
 import "./profile.scss";
 
@@ -15,6 +15,12 @@ export function Profile() {
     dispatch(UserLoginin(data.tokens["access_token"]));
 
   }, [dispatch]);
+  const Patch ={}
+  const PA = UserPatch({element:Patch,access_token: data.tokens["access_token"]})
+  const Save =(element)=>{
+    element.preventDefault()
+    PA(dispatch);
+  }
   return (
     <div className="wrapper">
       <div className="container">
@@ -43,7 +49,7 @@ export function Profile() {
                     <div className="settings__left">
                       <div className="settings__img">
                         <a href="" target="_self">
-                          <img src={`http://localhost:8090/${data.user.avatar[0]["url"]}`} alt="" />
+                          {data.user.avatar ? <img src={`http://localhost:8090/${data.user.avatar}`} alt="" />: <img src="#" alt="" />}
                         </a>
                       </div>
                       <a
@@ -55,7 +61,7 @@ export function Profile() {
                       </a>
                     </div>
                     <div className="settings__right">
-                      <form className="settings__form" action="#">
+                      <form onSubmit={e=>Save(e)} className="settings__form" action="#">
                         <div className="settings__div">
                           <label for="fname">Имя</label>
                           <input
@@ -63,8 +69,8 @@ export function Profile() {
                             id="settings-fname"
                             name="fname"
                             type="text"
-                            value={data.user.name}
-                            placeholder=""
+                            placeholder={data.user.name}
+                            onChange={(e) => (Patch.name = e.target.value)}
                           />
                         </div>
 
@@ -75,8 +81,9 @@ export function Profile() {
                             id="settings-lname"
                             name="lname"
                             type="text"
-                            value={data.user.surname}
-                            placeholder=""
+                            placeholder={data.user.surname}
+                            onChange={(e) => (Patch.surname = e.target.value)}
+
                           />
                         </div>
 
@@ -87,8 +94,9 @@ export function Profile() {
                             id="settings-city"
                             name="city"
                             type="text"
-                            value={data.user.city}
-                            placeholder=""
+                            placeholder={data.user.city}
+                            onChange={(e) => (Patch.city = e.target.value)}
+
                           />
                         </div>
 
@@ -99,8 +107,9 @@ export function Profile() {
                             id="settings-phone"
                             name="phone"
                             type="tel"
-                            value={data.user.phone}
-                            placeholder="+79161234567"
+                            placeholder={data.user.phone}
+                            onChange={(e) => (Patch.phone = e.target.value)}
+
                           />
                         </div>
 

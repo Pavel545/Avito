@@ -12,6 +12,7 @@ import {
   userRequestSuccess,
   userRegisterSuccess,
   userTokensSuccess,
+  userPatchSuccess,
 } from "../creators/todo";
 
 const BASE_URL = "http://localhost:8090";
@@ -85,7 +86,26 @@ export const UserLoginin = (access_token) => async (dispatch) => {
     dispatch(userRequestFailure(error));
   }
 };
-
+export const UserPatch = ({element,access_token}) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch(`${BASE_URL}/user`,element ,{
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    dispatch(userPatchSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailure(error));
+  }
+};
+export const ArticleCreate = ({obj,access_token}) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(`${BASE_URL}/adstext`, obj, {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    dispatch(userPatchSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailure(error));
+  }
+};
 // data:{
 //   password: logPas.password,
 //   role: logPas.role,

@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { EntrProfile } from "../entrance_profile";
+import { ArticleUp } from "../modal/upArticle/addnewat";
 import './style.scss'
 export function Header(params) {
+  const [active, setActive]=useState(false)
+
   return (
     <header className="header_no_main">
       <nav className="header_no_main__nav">
@@ -14,7 +18,7 @@ export function Header(params) {
             />
           </NavLink>
         </div>
-        <button className="header_no_main__btn-putAd btn-hov01" id="btputAd">
+        <button onClick={()=>setActive(true)} className="header_no_main__btn-putAd btn-hov01" id="btputAd">
           Разместить объявление
         </button>
         {/* <div className="header_no_main__btn-lk btn-hov01">
@@ -22,6 +26,8 @@ export function Header(params) {
         </div> */}
         <EntrProfile/>
       </nav>
+      <ArticleUp active={active} setActive={setActive}/>
+
     </header>
   );
 }

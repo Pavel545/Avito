@@ -9,6 +9,8 @@ import {
   USER_REQUEST_STARTED,
   USER_REGISTER_SUCCESS,
   USER_TOKENS_SUCCESS,
+  USER_PATCH_SUCCESS,
+  ARTICLE_UP_SUCCESS,
 } from "../actions/types/todo";
 
 const initialState = {
@@ -88,7 +90,34 @@ export default function todoReducer(state = initialState, action) {
           user: { ...state.todos.user },
         },
       };
+      case ARTICLE_UP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+
+        todos: {
+          all: [...state.todos.all],
+          current: { ...action.payload.todos.current },
+          seller: [...state.todos.seller],
+          user: { ...state.todos.user },
+        },
+      };
     case USER_REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+
+        todos: {
+          all: [...state.todos.all],
+          seller: [...state.todos.seller],
+          tokens: { ...state.todos.tokens },
+
+          user: { ...action.payload.todos.user },
+        },
+      };
+    case USER_PATCH_SUCCESS:
       return {
         ...state,
         loading: false,

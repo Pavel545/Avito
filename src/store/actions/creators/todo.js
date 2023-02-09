@@ -9,6 +9,8 @@ import {
   USER_REQUEST_STARTED,
   USER_REGISTER_SUCCESS,
   USER_TOKENS_SUCCESS,
+  USER_PATCH_SUCCESS,
+  ARTICLE_UP_SUCCESS,
 } from "../types/todo";
 
 export const allRequestStarted = () => ({
@@ -34,8 +36,19 @@ export const userTokensSuccess = (todos) => ({
     },
   },
 });
+export const articleUpCreatos = (todos) => ({
+  type: ARTICLE_UP_SUCCESS,
+});
 export const userRegisterSuccess = (todos) => ({
   type: USER_REGISTER_SUCCESS,
+  payload: {
+    todos: {
+      user: todos,
+    },
+  },
+});
+export const userPatchSuccess = (todos) => ({
+  type: USER_PATCH_SUCCESS,
   payload: {
     todos: {
       user: todos,
