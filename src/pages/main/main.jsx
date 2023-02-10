@@ -60,7 +60,7 @@ export function Main() {
           <div className="main__container">
             <h2 className="main__h2">Объявления</h2>
 
-            <div className="main__content">
+            <div className="main__content_gall">
               <div className="content__cards cards">
                 {data.all[0] ? <Gallery mass={mass} value={value} /> : ""}
               </div>

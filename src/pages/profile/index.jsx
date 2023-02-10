@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card } from "../../components/card/card";
 import { Footer } from "../../components/footer/footer";
@@ -9,6 +9,7 @@ import { todosSelector } from "../../store/selectors/todo";
 import "./profile.scss";
 
 export function Profile() {
+  const buttonRef=useRef(null)
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,13 +21,15 @@ export function Profile() {
   const Save =(element)=>{
     element.preventDefault()
     PA(dispatch);
+    console.log(buttonRef.current)
+    console.log(element.target)
   }
   return (
     <div className="wrapper">
       <div className="container">
         <Header />
         <main className="main">
-          <div className="main__container">
+          <div className="main__container_prof">
             <div className="main__center-block">
               <div className="main__menu menu">
                 <Logo />
@@ -116,6 +119,7 @@ export function Profile() {
                         <button
                           className="settings__btn btn-hov02"
                           id="settings-btn"
+                          ref={buttonRef}
                         >
                           Сохранить
                         </button>
@@ -127,9 +131,13 @@ export function Profile() {
 
               <h3 className="main__title title">Мои товары</h3>
             </div>
-            <div className="main__content">
+            <div className="main__content_profile">
               <div className="content__cards cards">
-                {/* <Card key={id} element={element} />                  */}
+              {data.all.map((element, id) => {
+                  if (element.user.id === data.user.id) {
+                    return <Card key={id} element={element} />;
+                  }
+                })}
               </div>
             </div>
           </div>

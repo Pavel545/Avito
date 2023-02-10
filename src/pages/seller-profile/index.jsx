@@ -36,7 +36,7 @@ export function SellerProfile() {
         <Header />
 
         <main className="main">
-          <div className="main__container">
+          <div className="main__container_sell">
             <div className="main__center-block">
               <div className="main__menu menu">
                 <Logo />

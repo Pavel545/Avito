@@ -1,5 +1,4 @@
 import axios from "axios";
-import { TOKEN } from "../../../constants";
 
 import {
   allRequestStarted,
@@ -8,8 +7,6 @@ import {
   certainCardSuccess,
   allSellerSuccess,
   userRequestFailure,
-  userRequestStarted,
-  userRequestSuccess,
   userRegisterSuccess,
   userTokensSuccess,
   userPatchSuccess,
@@ -106,12 +103,23 @@ export const ArticleCreate = ({obj,access_token}) => async (dispatch) => {
     dispatch(userRequestFailure(error));
   }
 };
-// data:{
-//   password: logPas.password,
-//   role: logPas.role,
-//   email: logPas.email,
-//   name: logPas.name,
-//   surname: logPas.surname,
-//   phone: logPas.phone,
-//   city: logPas.city,
-// },
+export const ArticleDelete = ({access_token,id}) => async (dispatch) => {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/ads/${id}`, {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    dispatch(userPatchSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailure(error));
+  }
+};
+export const ArticlePatch = ({access_token,id,obj}) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch(`${BASE_URL}/ads/${id}`,obj, {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    dispatch(userPatchSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailure(error));
+  }
+};

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { ArticleCreate } from "../../../store/actions/thunk/todo"
 import { todosSelector } from "../../../store/selectors/todo";
 import "./addnewat.scss"
-export function ArticleUp ({active, setActive}){
+export function ArticleUp ({active, setActive, patch}){
     const data = useSelector(todosSelector); 
     const image1 =useRef(null)
     const image2 =useRef(null)

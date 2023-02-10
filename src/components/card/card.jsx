@@ -1,11 +1,18 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { todosSelector } from "../../store/selectors/todo";
 import  "./style.scss";
 export function Card({ element }) {
+  let ar ='article';
+  const data =useSelector(todosSelector);
+  if(element.user_id===data.user.id){
+    ar='my_article'
+  }
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__image">
-          <NavLink to={`/article/${element.id}`}>
+          <NavLink to={`/${ar}/${element.id}`}>
             {element.images[0] ? (
               <img
                 src={`http://localhost:8090/${element.images[0]["url"]}`}
@@ -19,7 +26,7 @@ export function Card({ element }) {
           </a> */}
         </div>
         <div className="card__content">
-          <NavLink to={`/article/${element.id}`}>
+          <NavLink to={`/${ar}/${element.id}`}>
             <h3 className="card__title">{element.title}</h3>
           </NavLink>
           <p className="card__price">{element.price}&nbsp;₽</p>
