@@ -4,12 +4,14 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
+import { Commentsmodal } from "../../components/modal/comments";
 import { ArticleUp } from "../../components/modal/upArticle/addnewat";
 import { ArticleReset } from "../../components/modal/upArticle/atclsettings";
 import { ArticleComments, ArticleDelete, certainCard } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
 import './my-article.scss'
 export function MyArticle() {
+  const [active, setActive]=useState(false)
   const [stat ,setStat]=useState(false)
   const navigation = useNavigate()
     const params =useParams()
@@ -82,9 +84,10 @@ export function MyArticle() {
                         {new Date(data.current.created_on).toUTCString()}
                       </p>
                       <p className="article__city">Санкт-Петербург</p>
-                      <a className="article__link" href="" target="_blank" rel="">
+                      <a onClick={()=>setActive(true)} className="article__link" href="" target="_blank" rel="">
                         23 отзыва
                       </a>
+                        <Commentsmodal active={active} setActive={setActive}/>
                     </div>
                     <p className="article__price">{data.current.price} ₽</p>
                     <div className="article__btn-block">
