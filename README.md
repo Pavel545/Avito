@@ -3,7 +3,8 @@
 ### 1. Main menu(gallery).
 ### 2. A page with a detailed description of the product.
 ### 3. Profile (as well as modal registration and login windows)
-### 4. Implemented lot creation, editing and deletion
+### 4. Seller Profile
+### 5. Implemented lot creation, editing and deletion
 
 ## Implementation methods
  
