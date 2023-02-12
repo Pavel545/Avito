@@ -11,6 +11,7 @@ import {
   USER_TOKENS_SUCCESS,
   USER_PATCH_SUCCESS,
   ARTICLE_UP_SUCCESS,
+  USER_COMMENTS_SUCCESS,
 } from "../types/todo";
 
 export const allRequestStarted = () => ({
@@ -60,6 +61,14 @@ export const certainCardSuccess = (todos) => ({
   payload: {
     todos: {
       current: todos,
+    },
+  },
+});
+export const allComments = (todos) => ({
+  type: USER_COMMENTS_SUCCESS,
+  payload: {
+    todos: {
+      comment: todos,
     },
   },
 });

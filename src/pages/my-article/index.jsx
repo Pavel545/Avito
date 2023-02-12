@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
-import { certainCard } from "../../store/actions/thunk/todo";
+import { ArticleUp } from "../../components/modal/upArticle/addnewat";
+import { ArticleReset } from "../../components/modal/upArticle/atclsettings";
+import { ArticleComments, ArticleDelete, certainCard } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
 import './my-article.scss'
 export function MyArticle() {
+  const [stat ,setStat]=useState(false)
+  const navigation = useNavigate()
     const params =useParams()
     const data = useSelector(todosSelector);
     const dispatch = useDispatch();
     useEffect(() => {
     dispatch(certainCard({ id: params.id }));
+    dispatch(ArticleComments({id:params.id}))
   }, [dispatch, params.id]);
+  const DeleteArticle =()=>{
+    dispatch(ArticleDelete({id:params.id,access_token:data.tokens["access_token"]}))
+    navigation("/")
+  }
   if (!data.current) {
     return "Loading...";
   }
@@ -40,6 +49,8 @@ export function MyArticle() {
             </div>
   
             <div className="main__artic artic">
+            <ArticleReset active={stat} setActive={setStat} patch={params.id}/>
+
               <div className="artic__content article">
                 <div className="article__left">
                   <div className="article__fill-img">
@@ -77,10 +88,9 @@ export function MyArticle() {
                     </div>
                     <p className="article__price">{data.current.price} ₽</p>
                     <div class="article__btn-block">
-                        <button class="article__btn btn-redact btn-hov02">Редактировать</button>
-                        <button class="article__btn btn-remove btn-hov02">Снять с публикации</button>
+                        <button onClick={()=>setStat(true)} class="article__btn btn-redact btn-hov02">Редактировать</button>
+                        <button onClick={DeleteArticle} class="article__btn btn-remove btn-hov02">Снять с публикации</button>
                     </div>
-
                     
                     <div className="article__author author">
                       <div className="author__img">

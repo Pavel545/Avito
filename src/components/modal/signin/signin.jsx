@@ -3,11 +3,28 @@ import { UserToken } from "../../../store/actions/thunk/todo";
 
 import { useDispatch } from "react-redux";
 import "./signin.scss";
+import axios from "axios";
+import { userRequestFailure, userTokensSuccess } from "../../../store/actions/creators/todo";
+import { BASE_URL } from "../../../constants";
+import { useNavigate } from "react-router-dom";
 
 
 
 export function SigninJSX({ active, setActive,reg,setReg }) {
-
+  const navigate =useNavigate()
+ const UserToken = (logPas) => async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/auth/login`, logPas, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      dispatch(userTokensSuccess(data));
+      navigate("/profile")
+    } catch (error) {
+      dispatch(userRequestFailure(error));
+    }
+  };
 
   let logPas =
     {

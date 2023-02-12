@@ -11,12 +11,13 @@ import {
   USER_TOKENS_SUCCESS,
   USER_PATCH_SUCCESS,
   ARTICLE_UP_SUCCESS,
+  USER_COMMENTS_SUCCESS,
 } from "../actions/types/todo";
 
 const initialState = {
   loading: false,
   error: null,
-  todos: { all: [], current: {}, seller: [], user: {} },
+  todos: { all: [], current: {}, seller: [], user: {}},
 };
 
 export default function todoReducer(state = initialState, action) {
@@ -61,7 +62,22 @@ export default function todoReducer(state = initialState, action) {
           all: [...action.payload.todos.all],
           seller: [...state.todos.seller],
           user: { ...state.todos.user },
-          // tokens:{...state.todos.tokens}
+          tokens:{...state.todos.tokens}
+        },
+      };
+      case USER_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+
+        todos: {
+          all: [...state.todos.all],
+          seller: [...state.todos.seller],
+          user: { ...state.todos.user },
+          tokens:{...state.todos.tokens},
+          comment: {...action.payload.todos.comment},
+
         },
       };
     case USER_TOKENS_SUCCESS:
@@ -88,6 +104,8 @@ export default function todoReducer(state = initialState, action) {
           current: { ...action.payload.todos.current },
           seller: [...state.todos.seller],
           user: { ...state.todos.user },
+          tokens: { ...state.todos.tokens },
+          comments:[],
         },
       };
       case ARTICLE_UP_SUCCESS:
@@ -101,6 +119,8 @@ export default function todoReducer(state = initialState, action) {
           current: { ...action.payload.todos.current },
           seller: [...state.todos.seller],
           user: { ...state.todos.user },
+          comments:[],
+
         },
       };
     case USER_REGISTER_SUCCESS:
@@ -141,7 +161,7 @@ export default function todoReducer(state = initialState, action) {
           all: [...state.todos.all],
           seller: [...action.payload.todos.seller],
           user: { ...state.todos.user },
-          // tokens:{...state.todos.tokens}
+          tokens:{...state.todos.tokens}
         },
       };
 

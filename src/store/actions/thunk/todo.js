@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../../../constants";
 
 import {
   allRequestStarted,
@@ -10,9 +11,10 @@ import {
   userRegisterSuccess,
   userTokensSuccess,
   userPatchSuccess,
+  allComments,
 } from "../creators/todo";
 
-const BASE_URL = "http://localhost:8090";
+
 
 export const allCard = () => async (dispatch) => {
   dispatch(allRequestStarted());
@@ -49,18 +51,7 @@ export const allSeller = () => async (dispatch) => {
     dispatch(allRequestFailure(error));
   }
 };
-export const UserToken = (logPas) => async (dispatch) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/auth/login`, logPas, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    dispatch(userTokensSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};
+
 export const UserRegister = (logPas) => async (dispatch) => {
   try {
     const { data } = await axios.post(`${BASE_URL}/auth/register`, logPas, {
@@ -103,7 +94,7 @@ export const ArticleCreate = ({obj,access_token}) => async (dispatch) => {
     dispatch(userRequestFailure(error));
   }
 };
-export const ArticleDelete = ({access_token,id}) => async (dispatch) => {
+export const ArticleDelete = ({id,access_token}) => async (dispatch) => {
   try {
     const { data } = await axios.delete(`${BASE_URL}/ads/${id}`, {
       headers: { Authorization: `Bearer ${access_token}` },
@@ -119,6 +110,14 @@ export const ArticlePatch = ({access_token,id,obj}) => async (dispatch) => {
       headers: { Authorization: `Bearer ${access_token}` },
     });
     dispatch(userPatchSuccess(data));
+  } catch (error) {
+    dispatch(userRequestFailure(error));
+  }
+};
+export const ArticleComments = ({id}) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/ads/${id}/comments`);
+    dispatch(allComments(data));
   } catch (error) {
     dispatch(userRequestFailure(error));
   }

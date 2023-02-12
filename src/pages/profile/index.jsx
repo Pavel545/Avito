@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/card/card";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
@@ -24,6 +25,11 @@ export function Profile() {
     console.log(buttonRef.current)
     console.log(element.target)
   }
+  const navigate =useNavigate()
+  const goToHome =(e)=>{
+    e.preventDefault()
+    navigate("/")
+  }
   return (
     <div className="wrapper">
       <div className="container">
@@ -33,7 +39,7 @@ export function Profile() {
             <div className="main__center-block">
               <div className="main__menu menu">
                 <Logo />
-                <form className="menu__form" action="#">
+                <form onChange={e=>goToHome(e)} className="menu__form" >
                   <button className="menu__btn btn-hov02" id="btnGoBack">
                     Вернуться на&nbsp;главную
                   </button>

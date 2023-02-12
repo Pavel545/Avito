@@ -9,7 +9,6 @@ import "./signup.scss";
 export function SignupJSX({ reg, setReg }) {
   console.log(reg);
   const dispatch = useDispatch()
-  const navigate = useNavigate();
   const data = useSelector(todosSelector);
 
     const Register={
@@ -30,11 +29,6 @@ export function SignupJSX({ reg, setReg }) {
         setReg(false)
         
       }
-      useEffect(()=>{
-        if (data.tokens) {
-          navigate("/profile");
-        }
-      },[data.tokens])
   return (
     <div
       onClick={() => setReg(false)}

@@ -4,24 +4,32 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
+import { CommentsModal } from "../../components/modal/comments";
+import { allComments } from "../../store/actions/creators/todo";
 import { certainCard } from "../../store/actions/thunk/todo";
 import { todosSelector } from "../../store/selectors/todo";
 import "./article.scss";
 
 export function Article() {
   const params = useParams();
+  const [active, setActive]=useState(false)
 
   const [chek, setChek] = useState(false);
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(certainCard({ id: params.id }));
+    dispatch(allComments({id:params.id}))
   }, [dispatch, params.id]);
   if (!data.current) {
     return "Loading...";
   }
   if (!data.current.user) {
     return "Loading...";
+  }
+  const Comments =(e)=>{
+    e.preventDefault()
+    setActive(true)
   }
   return (
     <div className="wrapper">
@@ -73,10 +81,11 @@ export function Article() {
                     <p className="article__date">
                       {new Date(data.current.created_on).toUTCString()}
                     </p>
-                    <p className="article__city">Санкт-Петербург</p>
-                    <a className="article__link" href="" target="_blank" rel="">
+                    <p className="article__city">{data.current.user.city}</p>
+                    <a onChange={e=>Comments(e)} className="article__link" >
                       23 отзыва
                     </a>
+                    <CommentsModal active={active} setActive={setActive}/>
                   </div>
                   <p className="article__price">{data.current.price} ₽</p>
                   <button

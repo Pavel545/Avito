@@ -1,11 +1,10 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { SigninJSX } from "../modal/signin/signin";
 import { SignupJSX } from "../modal/signin/signup";
 import "./style.scss";
 export const EntrProfile = () => {
   const [active, setActive] = useState(false);
   const [reg, setReg] = useState(false);
-
   return (
     <div>
       <button
