@@ -1,21 +1,23 @@
 import { useState } from "react"
+import "./reviews.scss";
 
-export function CommentsModal ({active,setActive}){
+
+export function Commentsmodal ({active,setActive}){
 
     return(
         <div 
         onClick={() => setActive(false)}
-        classNameName={active ? "wrapper_modal active" : "wrapper_modal"}
+        className={!active ? "wrapper_comment active" : "wrapper_comment"}
         >
-        <div className="container-bg">
-            <div onClick={(e) => e.stopPropagation()} className="modal__block">
-                <div className="modal__content">
-                    <h3 className="modal__title">Отзывы о товаре</h3>
-                    <div className="modal__btn-close">
-                        <div onClick={setActive(false)} className="modal__btn-close-line"></div>
+        <div className="containers-bg">
+            <div onClick={(e) => e.stopPropagation()} className="modali__block">
+                <div className="modali__content">
+                    <h3 className="modali__title">Отзывы о товаре</h3>
+                    <div className="modali__btn-close">
+                        <div onClick={setActive(false)} className="modali__btn-close-line"></div>
                     </div>
-                    <div className="modal__scroll">
-                        <form className="modal__form-newArt form-newArt" id="formNewArt" action="#">
+                    <div className="modali__scroll">
+                        <form className="modali__form-newArt form-newArt" id="formNewArt" action="#">
                             <div className="form-newArt__block">
                                 <label for="text">Добавить отзыв</label>
                                 <textarea className="form-newArt__area" name="text" id="formArea" cols="auto" rows="5" placeholder="Введите описание"></textarea>
@@ -23,7 +25,7 @@ export function CommentsModal ({active,setActive}){
                             <button className="form-newArt__btn-pub btn-hov02" id="btnPublish">Опубликовать</button>
                         </form>
                         
-                        <div className="modal__reviews reviews">
+                        <div className="modali__reviews reviews">
 
                             <div className="reviews__review review">
                                 <div className="review__item">

@@ -22,15 +22,10 @@ export function Header(params) {
             />
           </NavLink>
         </div>
-
-        <button onClick={()=>setActive(true)} className="header_no_main__btn-putAd btn-hov01" id="btputAd">
-      {data.user.id ?"Разместить объявление":<LogReg/>}
-
-          
-        </button>
-        {/* <div className="header_no_main__btn-lk btn-hov01">
-          
-        </div> */}
+        {params.create ? <button onClick={()=>setActive(true)} className="header_no_main__btn-putAd btn-hov01" >
+          Разместить объявление
+        </button>:none}
+        
         <EntrProfile/>
       </nav>
       {data.user.id ?<ArticleUp active={active} setActive={setActive}/>:none}

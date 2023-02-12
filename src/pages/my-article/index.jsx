@@ -87,13 +87,13 @@ export function MyArticle() {
                       </a>
                     </div>
                     <p className="article__price">{data.current.price} ₽</p>
-                    <div class="article__btn-block">
-                        <button onClick={()=>setStat(true)} class="article__btn btn-redact btn-hov02">Редактировать</button>
-                        <button onClick={DeleteArticle} class="article__btn btn-remove btn-hov02">Снять с публикации</button>
+                    <div className="article__btn-block">
+                        <button onClick={()=>setStat(true)} className="article__btn btn-redact btn-hov02" >Редактировать</button>
+                        <button onClick={DeleteArticle} className="article__btn btn-remove btn-hov02" >Снять с публикации</button>
                     </div>
                     
                     <div className="article__author author">
-                      <div className="author__img">
+                      <div className="author__img"> 
                         <img
                           src={`http://localhost:8090/${data.current.user.avatar}`}
                           alt=""

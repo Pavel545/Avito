@@ -33,7 +33,7 @@ export function Profile() {
   return (
     <div className="wrapper">
       <div className="container">
-        <Header />
+        <Header create="create" />
         <main className="main">
           <div className="main__container_prof">
             <div className="main__center-block">
