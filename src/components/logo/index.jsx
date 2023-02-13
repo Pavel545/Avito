@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import "./style.scss"
 export function Logo(params) {
   return (
     <div>
@@ -20,3 +20,5 @@ export function Logo(params) {
     </div>
   );
 }
+
+
