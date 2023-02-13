@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { LoginIN } from "../modules/loginIN";
+import { Modules } from "../modules/modules";
 import "./style.scss";
 
 
 export function Header(params) {
+  const [active, setActive] = useState(false);
+
   return (
     <header className="header_no_main">
       <nav className="header_no_main__nav">
@@ -15,10 +20,11 @@ export function Header(params) {
             />
           </NavLink>
         </div>
-        <button className="header_no_main__btn-lk btn-hov01" id="btnlk">
+        <button onClick={()=>setActive(true)} className="header_no_main__btn-lk btn-hov01" id="btnlk">
           Личный кабинет
         </button>
       </nav>
+      <Modules active={active} setActive={setActive} child={<LoginIN/>} />
     </header>
   );
 }

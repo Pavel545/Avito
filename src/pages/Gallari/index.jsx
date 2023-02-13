@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { Logo } from "../../components/Logo";
 import "./style.scss";
-import { BASE_URL } from "../../components/constanst/insdex";
+import { BASE_URL } from "../../components/constants/index";
 import { Card } from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { allCardGalleri } from "../../components/store/actions/creators/todo";
@@ -36,15 +36,14 @@ export function Gallari() {
 
     console.log(mass);
   }, [data,dispatch]);
-  if (mass === null) {
-    return "Loading...";
+  
+  if (!data.all) {
+    return <p>Loading...</p>;
   }
-
   return (
     <main className="main">
       <div className="main__search search">
         <Logo />
-
         <div className="search__form">
           <input
             ref={filter}
@@ -69,6 +68,9 @@ export function Gallari() {
   );
 }
 const Gallery = ({ value, mass }) => {
+  if ((mass === null)||(mass === undefined)) {
+    return<p>Loading...</p>;
+  }
   const filterMass = mass.filter((element) => {
     return element.title.toLowerCase().includes(value.toLowerCase());
   });

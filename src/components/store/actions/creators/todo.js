@@ -1,4 +1,4 @@
-import { ALL_CARD_SUCCESS } from "../types/todo";
+import { ALL_CARD_SUCCESS, CERTAIN_CARD_SUCCESS } from "../types/todo";
 
 
 export const allCardGalleri = (todos) => ({
@@ -6,6 +6,14 @@ export const allCardGalleri = (todos) => ({
   payload: {
     todos: {
       all: todos,
+    },
+  },
+});
+export const cardWan = (todos) => ({
+  type: CERTAIN_CARD_SUCCESS,
+  payload: {
+    todos: {
+      card: todos,
     },
   },
 });
