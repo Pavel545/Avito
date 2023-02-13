@@ -14,8 +14,6 @@ import {
   allComments,
 } from "../creators/todo";
 
-
-
 export const allCard = () => async (dispatch) => {
   dispatch(allRequestStarted());
 
@@ -74,51 +72,61 @@ export const UserLoginin = (access_token) => async (dispatch) => {
     dispatch(userRequestFailure(error));
   }
 };
-export const UserPatch = ({element,access_token}) => async (dispatch) => {
-  try {
-    const { data } = await axios.patch(`${BASE_URL}/user`,element ,{
-      headers: { Authorization: `Bearer ${access_token}` },
-    });
-    dispatch(userPatchSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};
-export const ArticleCreate = ({obj,access_token}) => async (dispatch) => {
-  try {
-    const { data } = await axios.post(`${BASE_URL}/adstext`, obj, {
-      headers: { Authorization: `Bearer ${access_token}` },
-    });
-    dispatch(userPatchSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};
-export const ArticleDelete = ({id,access_token}) => async (dispatch) => {
-  try {
-    const { data } = await axios.delete(`${BASE_URL}/ads/${id}`, {
-      headers: { Authorization: `Bearer ${access_token}` },
-    });
-    dispatch(userPatchSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};
-export const ArticlePatch = ({access_token,id,obj}) => async (dispatch) => {
-  try {
-    const { data } = await axios.patch(`${BASE_URL}/ads/${id}`,obj, {
-      headers: { Authorization: `Bearer ${access_token}` },
-    });
-    dispatch(userPatchSuccess(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};
-export const ArticleComments = ({id}) => async (dispatch) => {
-  try {
-    const { data } = await axios.get(`${BASE_URL}/ads/${id}/comments`);
-    dispatch(allComments(data));
-  } catch (error) {
-    dispatch(userRequestFailure(error));
-  }
-};
+export const UserPatch =
+  ({ element, access_token }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.patch(`${BASE_URL}/user`, element, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      dispatch(userPatchSuccess(data));
+    } catch (error) {
+      dispatch(userRequestFailure(error));
+    }
+  };
+export const ArticleCreate =
+  ({ obj, access_token }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/adstext`, obj, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      dispatch(userPatchSuccess(data));
+    } catch (error) {
+      dispatch(userRequestFailure(error));
+    }
+  };
+export const ArticleDelete =
+  ({ id, access_token }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.delete(`${BASE_URL}/ads/${id}`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      dispatch(userPatchSuccess(data));
+    } catch (error) {
+      dispatch(userRequestFailure(error));
+    }
+  };
+export const ArticlePatch =
+  ({ access_token, id, obj }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.patch(`${BASE_URL}/ads/${id}`, obj, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      dispatch(userPatchSuccess(data));
+    } catch (error) {
+      dispatch(userRequestFailure(error));
+    }
+  };
+export const ArticleComments =
+  ({ id }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/ads/${id}/comments`);
+      dispatch(allComments(data));
+    } catch (error) {
+      dispatch(userRequestFailure(error));
+    }
+  };

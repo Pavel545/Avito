@@ -8,27 +8,25 @@ import "./signup.scss";
 
 export function SignupJSX({ reg, setReg }) {
   console.log(reg);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const data = useSelector(todosSelector);
 
-    const Register={
-        password: "string",
-        role: "user",
-        email: "user@example.com",
-        name: "string",
-        surname: "string",
-        phone: "string",
-        city: "string",
-      }
+  const Register = {
+    password: "string",
+    role: "user",
+    email: "user@example.com",
+    name: "string",
+    surname: "string",
+    phone: "string",
+    city: "string",
+  };
 
-
-      const a =UserRegister(Register)
-      const RegUp=()=>{
-        console.log(Register);
-        a(dispatch)
-        setReg(false)
-        
-      }
+  const a = UserRegister(Register);
+  const RegUp = () => {
+    console.log(Register);
+    a(dispatch);
+    setReg(false);
+  };
   return (
     <div
       onClick={() => setReg(false)}
@@ -36,7 +34,12 @@ export function SignupJSX({ reg, setReg }) {
     >
       <div className="container-signup">
         <div onClick={(e) => e.stopPropagation()} className="modal__block">
-          <form onSubmit={e=>e.preventDefault()} className="modal__form-login" id="formLogUp" action="#">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="modal__form-login"
+            id="formLogUp"
+            action="#"
+          >
             <div className="modal__logo">
               <img
                 src={process.env.PUBLIC_URL + "/logo_modal.png"}
@@ -49,7 +52,7 @@ export function SignupJSX({ reg, setReg }) {
               type="text"
               name="login"
               placeholder="email"
-              onChange={e=>Register.email=e.target.value}
+              onChange={(e) => (Register.email = e.target.value)}
             />
             <input
               required
@@ -57,7 +60,7 @@ export function SignupJSX({ reg, setReg }) {
               type="password"
               name="password"
               placeholder="Пароль"
-              onChange={e=>Register.password=e.target.value}
+              onChange={(e) => (Register.password = e.target.value)}
             />
             <input
               required
@@ -71,23 +74,27 @@ export function SignupJSX({ reg, setReg }) {
               type="text"
               name="first-name"
               placeholder="Имя (необязательно)"
-              onChange={e=>Register.name=e.target.value}
+              onChange={(e) => (Register.name = e.target.value)}
             />
             <input
               className="modal__input first-last"
               type="text"
               name="first-last"
               placeholder="Фамилия (необязательно)"
-              onChange={e=>Register.surname=e.target.value}
+              onChange={(e) => (Register.surname = e.target.value)}
             />
             <input
               className="modal__input city"
               type="text"
               name="city"
               placeholder="Город (необязательно)"
-              onChange={e=>Register.city=e.target.value}
+              onChange={(e) => (Register.city = e.target.value)}
             />
-            <button onClick={RegUp} className="modal__btn-signup-ent" id="SignUpEnter">
+            <button
+              onClick={RegUp}
+              className="modal__btn-signup-ent"
+              id="SignUpEnter"
+            >
               <a>Зарегистрироваться</a>{" "}
             </button>
           </form>

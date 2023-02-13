@@ -32,7 +32,7 @@ export function Main() {
       <div className="container">
         <header className="header">
           <nav className="header__nav">
-           <EntrProfile/>
+            <EntrProfile />
           </nav>
         </header>
         <main className="main">
@@ -67,7 +67,7 @@ export function Main() {
             </div>
           </div>
         </main>
-        
+
         <Footer />
       </div>
     </div>
