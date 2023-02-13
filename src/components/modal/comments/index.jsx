@@ -17,12 +17,12 @@ export function Commentsmodal ({active,setActive}){
                         <div onClick={setActive(false)} className="modali__btn-close-line"></div>
                     </div>
                     <div className="modali__scroll">
-                        <form className="modali__form-newArt form-newArt" id="formNewArt" action="#">
+                        <form className="modali__form-newArt form-newArt"  action="#">
                             <div className="form-newArt__block">
                                 <label for="text">Добавить отзыв</label>
-                                <textarea className="form-newArt__area" name="text" id="formArea" cols="auto" rows="5" placeholder="Введите описание"></textarea>
+                                <textarea className="form-newArt__area" name="text"  cols="auto" rows="5" placeholder="Введите описание"></textarea>
                             </div>
-                            <button className="form-newArt__btn-pub btn-hov02" id="btnPublish">Опубликовать</button>
+                            <button className="form-newArt__btn-pub btn-hov02" >Опубликовать</button>
                         </form>
                         
                         <div className="modali__reviews reviews">

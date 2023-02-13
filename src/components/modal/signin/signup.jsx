@@ -48,7 +48,6 @@ export function SignupJSX({ reg, setReg }) {
               className="modal__input login"
               type="text"
               name="login"
-              id="loginReg"
               placeholder="email"
               onChange={e=>Register.email=e.target.value}
             />
@@ -57,7 +56,6 @@ export function SignupJSX({ reg, setReg }) {
               className="modal__input password-first"
               type="password"
               name="password"
-              id="passwordFirst"
               placeholder="Пароль"
               onChange={e=>Register.password=e.target.value}
             />
@@ -66,14 +64,12 @@ export function SignupJSX({ reg, setReg }) {
               className="modal__input password-double"
               type="password"
               name="password"
-              id="passwordSecond"
               placeholder="Повторите пароль"
             />
             <input
               className="modal__input first-name"
               type="text"
               name="first-name"
-              id="first-name"
               placeholder="Имя (необязательно)"
               onChange={e=>Register.name=e.target.value}
             />
@@ -81,7 +77,6 @@ export function SignupJSX({ reg, setReg }) {
               className="modal__input first-last"
               type="text"
               name="first-last"
-              id="first-last"
               placeholder="Фамилия (необязательно)"
               onChange={e=>Register.surname=e.target.value}
             />
@@ -89,7 +84,6 @@ export function SignupJSX({ reg, setReg }) {
               className="modal__input city"
               type="text"
               name="city"
-              id="city"
               placeholder="Город (необязательно)"
               onChange={e=>Register.city=e.target.value}
             />

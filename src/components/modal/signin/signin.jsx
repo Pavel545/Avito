@@ -71,14 +71,13 @@ export function SigninJSX({ active, setActive,reg,setReg }) {
                 onChange={(e) => (logPas.password = e.target.value)}
 
               />
-              <button className="modal__btn-enter" id="btnEnter">
+              <button className="modal__btn-enter" >
                 <a>Войти</a>{" "}
               </button>
             </form>
             <button
               onClick={() => setReg(true)}
               className="modal__btn-signup"
-              id="btnSignUp"
             >
               <a>Зарегистрироваться</a>{" "}
             </button>

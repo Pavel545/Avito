@@ -19,7 +19,7 @@ export function Article() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(certainCard({ id: params.id }));
-    dispatch(allComments({id:params.id}))
+    // dispatch(allComments({id:params.id}))
   }, [dispatch, params.id]);
   if (!data.current) {
     return "Loading...";
