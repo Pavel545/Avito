@@ -19,7 +19,7 @@ export function MyArticle() {
     const dispatch = useDispatch();
     useEffect(() => {
     dispatch(certainCard({ id: params.id }));
-    dispatch(ArticleComments({id:params.id}))
+    // dispatch(ArticleComments({id:params.id}))
   }, [dispatch, params.id]);
   const DeleteArticle =()=>{
     dispatch(ArticleDelete({id:params.id,access_token:data.tokens["access_token"]}))
@@ -87,7 +87,7 @@ export function MyArticle() {
                       <a onClick={()=>setActive(true)} className="article__link" href="" target="_blank" rel="">
                         23 отзыва
                       </a>
-                        <Commentsmodal active={active} setActive={setActive}/>
+                        {/* <Commentsmodal active={active} setActive={setActive}/> */}
                     </div>
                     <p className="article__price">{data.current.price} ₽</p>
                     <div className="article__btn-block">
