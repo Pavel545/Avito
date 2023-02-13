@@ -1,21 +1,17 @@
-import { useState } from "react";
-import "./reviews.scss";
+import { useState } from 'react';
+import './reviews.scss';
 
 export function Commentsmodal({ active, setActive }) {
   return (
     <div
       onClick={() => setActive(false)}
-      className={!active ? "wrapper_comment active" : "wrapper_comment"}
-    >
+      className={!active ? 'wrapper_comment active' : 'wrapper_comment'}>
       <div className="containers-bg">
         <div onClick={(e) => e.stopPropagation()} className="modali__block">
           <div className="modali__content">
             <h3 className="modali__title">Отзывы о товаре</h3>
             <div className="modali__btn-close">
-              <div
-                onClick={setActive(false)}
-                className="modali__btn-close-line"
-              ></div>
+              <div onClick={setActive(false)} className="modali__btn-close-line"></div>
             </div>
             <div className="modali__scroll">
               <form className="modali__form-newArt form-newArt" action="#">
@@ -26,12 +22,9 @@ export function Commentsmodal({ active, setActive }) {
                     name="text"
                     cols="auto"
                     rows="5"
-                    placeholder="Введите описание"
-                  ></textarea>
+                    placeholder="Введите описание"></textarea>
                 </div>
-                <button className="form-newArt__btn-pub btn-hov02">
-                  Опубликовать
-                </button>
+                <button className="form-newArt__btn-pub btn-hov02">Опубликовать</button>
               </form>
 
               <div className="modali__reviews reviews">
@@ -48,9 +41,8 @@ export function Commentsmodal({ active, setActive }) {
                       </p>
                       <h5 className="review__title font-t">Комментарий</h5>
                       <p className="review__text font-t">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
                       </p>
                     </div>
                   </div>
@@ -69,9 +61,8 @@ export function Commentsmodal({ active, setActive }) {
                       </p>
                       <h5 className="review__title font-t">Комментарий</h5>
                       <p className="review__text font-t">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
                       </p>
                     </div>
                   </div>
@@ -90,9 +81,8 @@ export function Commentsmodal({ active, setActive }) {
                       </p>
                       <h5 className="review__title font-t">Комментарий</h5>
                       <p className="review__text font-t">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
                       </p>
                     </div>
                   </div>
@@ -111,9 +101,8 @@ export function Commentsmodal({ active, setActive }) {
                       </p>
                       <h5 className="review__title font-t">Комментарий</h5>
                       <p className="review__text font-t">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
                       </p>
                     </div>
                   </div>
@@ -132,9 +121,8 @@ export function Commentsmodal({ active, setActive }) {
                       </p>
                       <h5 className="review__title font-t">Комментарий</h5>
                       <p className="review__text font-t">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
                       </p>
                     </div>
                   </div>

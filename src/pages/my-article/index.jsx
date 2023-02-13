@@ -4,8 +4,6 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { Footer } from "../../components/footer/footer";
 import { Header } from "../../components/header";
 import { Logo } from "../../components/logo";
-import { Commentsmodal } from "../../components/modal/comments";
-import { ArticleUp } from "../../components/modal/upArticle/addnewat";
 import { ArticleReset } from "../../components/modal/upArticle/atclsettings";
 import {
   ArticleComments,

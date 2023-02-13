@@ -105,7 +105,7 @@ export default function todoReducer(state = initialState, action) {
           seller: [...state.todos.seller],
           user: { ...state.todos.user },
           tokens: { ...state.todos.tokens },
-          comments:[],
+          comments:{},
         },
       };
       case ARTICLE_UP_SUCCESS:
@@ -119,7 +119,7 @@ export default function todoReducer(state = initialState, action) {
           current: { ...action.payload.todos.current },
           seller: [...state.todos.seller],
           user: { ...state.todos.user },
-          comments:[],
+          comments:[...state.todos.comments ],
 
         },
       };
