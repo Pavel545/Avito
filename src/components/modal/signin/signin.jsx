@@ -4,15 +4,16 @@ import { UserToken } from "../../../store/actions/thunk/todo";
 import { useDispatch } from "react-redux";
 import "./signin.scss";
 import axios from "axios";
-import { userRequestFailure, userTokensSuccess } from "../../../store/actions/creators/todo";
+import {
+  userRequestFailure,
+  userTokensSuccess,
+} from "../../../store/actions/creators/todo";
 import { BASE_URL } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 
-
-
-export function SigninJSX({ active, setActive,reg,setReg }) {
-  const navigate =useNavigate()
- const UserToken = (logPas) => async (dispatch) => {
+export function SigninJSX({ active, setActive, reg, setReg }) {
+  const navigate = useNavigate();
+  const UserToken = (logPas) => async (dispatch) => {
     try {
       const { data } = await axios.post(`${BASE_URL}/auth/login`, logPas, {
         headers: {
@@ -20,34 +21,32 @@ export function SigninJSX({ active, setActive,reg,setReg }) {
         },
       });
       dispatch(userTokensSuccess(data));
-      navigate("/profile")
+      navigate("/profile");
     } catch (error) {
       dispatch(userRequestFailure(error));
     }
   };
 
-  let logPas =
-    {
-      email: "user@example.com",
-      password: "string"
-    }
-  
-  const dispatch = useDispatch();
-  const loginIn = UserToken(logPas)
-  const logIn=(e)=>{
-    e.preventDefault()
-    loginIn(dispatch);
+  let logPas = {
+    email: "user@example.com",
+    password: "string",
+  };
 
-  }
+  const dispatch = useDispatch();
+  const loginIn = UserToken(logPas);
+  const logIn = (e) => {
+    e.preventDefault();
+    loginIn(dispatch);
+  };
   return (
     <div
       onClick={() => setActive(false)}
-      className={(active && !reg) ? "wrapper_modal active" : "wrapper_modal"}
+      className={active && !reg ? "wrapper_modal active" : "wrapper_modal"}
     >
       <div className="container-enter">
         <div onClick={(e) => e.stopPropagation()} className="modal__block">
           <div className="modal__form-login">
-            <form onSubmit={e=>logIn(e)} id="formLogIn" >
+            <form onSubmit={(e) => logIn(e)} id="formLogIn">
               <div className="modal__logo">
                 <img
                   src={process.env.PUBLIC_URL + "/logo_modal.png"}
@@ -69,16 +68,12 @@ export function SigninJSX({ active, setActive,reg,setReg }) {
                 placeholder="Пароль"
                 required
                 onChange={(e) => (logPas.password = e.target.value)}
-
               />
-              <button className="modal__btn-enter" >
+              <button className="modal__btn-enter">
                 <a>Войти</a>{" "}
               </button>
             </form>
-            <button
-              onClick={() => setReg(true)}
-              className="modal__btn-signup"
-            >
+            <button onClick={() => setReg(true)} className="modal__btn-signup">
               <a>Зарегистрироваться</a>{" "}
             </button>
           </div>

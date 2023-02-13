@@ -1,8 +1,8 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { SigninJSX } from "../modal/signin/signin";
 import { SignupJSX } from "../modal/signin/signup";
 import "./style.scss";
-export function EntrProfile  () {
+export function EntrProfile() {
   const [active, setActive] = useState(false);
   const [reg, setReg] = useState(false);
   return (
@@ -26,4 +26,4 @@ export function EntrProfile  () {
       </div>
     </div>
   );
-};
+}

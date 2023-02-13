@@ -10,26 +10,28 @@ import { todosSelector } from "../../store/selectors/todo";
 import "./profile.scss";
 
 export function Profile() {
-  const buttonRef=useRef(null)
+  const buttonRef = useRef(null);
   const data = useSelector(todosSelector);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(UserLoginin(data.tokens["access_token"]));
-
   }, [dispatch]);
-  const Patch ={}
-  const PA = UserPatch({element:Patch,access_token: data.tokens["access_token"]})
-  const Save =(element)=>{
-    element.preventDefault()
+  const Patch = {};
+  const PA = UserPatch({
+    element: Patch,
+    access_token: data.tokens["access_token"],
+  });
+  const Save = (element) => {
+    element.preventDefault();
     PA(dispatch);
-    console.log(buttonRef.current)
-    console.log(element.target)
-  }
-  const navigate =useNavigate()
-  const goToHome =(e)=>{
-    e.preventDefault()
-    navigate("/")
-  }
+    console.log(buttonRef.current);
+    console.log(element.target);
+  };
+  const navigate = useNavigate();
+  const goToHome = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   return (
     <div className="wrapper">
       <div className="container">
@@ -39,7 +41,7 @@ export function Profile() {
             <div className="main__center-block">
               <div className="main__menu menu">
                 <Logo />
-                <form onChange={e=>goToHome(e)} className="menu__form" >
+                <form onChange={(e) => goToHome(e)} className="menu__form">
                   <button className="menu__btn btn-hov02" id="btnGoBack">
                     Вернуться на&nbsp;главную
                   </button>
@@ -58,7 +60,14 @@ export function Profile() {
                     <div className="settings__left">
                       <div className="settings__img">
                         <a href="" target="_self">
-                          {data.user.avatar ? <img src={`http://localhost:8090/${data.user.avatar}`} alt="" />: <img src="#" alt="" />}
+                          {data.user.avatar ? (
+                            <img
+                              src={`http://localhost:8090/${data.user.avatar}`}
+                              alt=""
+                            />
+                          ) : (
+                            <img src="#" alt="" />
+                          )}
                         </a>
                       </div>
                       <a
@@ -70,7 +79,11 @@ export function Profile() {
                       </a>
                     </div>
                     <div className="settings__right">
-                      <form onSubmit={e=>Save(e)} className="settings__form" action="#">
+                      <form
+                        onSubmit={(e) => Save(e)}
+                        className="settings__form"
+                        action="#"
+                      >
                         <div className="settings__div">
                           <label for="fname">Имя</label>
                           <input
@@ -92,7 +105,6 @@ export function Profile() {
                             type="text"
                             placeholder={data.user.surname}
                             onChange={(e) => (Patch.surname = e.target.value)}
-
                           />
                         </div>
 
@@ -105,7 +117,6 @@ export function Profile() {
                             type="text"
                             placeholder={data.user.city}
                             onChange={(e) => (Patch.city = e.target.value)}
-
                           />
                         </div>
 
@@ -118,7 +129,6 @@ export function Profile() {
                             type="tel"
                             placeholder={data.user.phone}
                             onChange={(e) => (Patch.phone = e.target.value)}
-
                           />
                         </div>
 
@@ -139,7 +149,7 @@ export function Profile() {
             </div>
             <div className="main__content_profile">
               <div className="content__cards cards">
-              {data.all.map((element, id) => {
+                {data.all.map((element, id) => {
                   if (element.user.id === data.user.id) {
                     return <Card key={id} element={element} />;
                   }

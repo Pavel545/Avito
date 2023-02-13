@@ -5,11 +5,11 @@ import { todosSelector } from "../../store/selectors/todo";
 import { EntrProfile } from "../entrance_profile";
 import { LogReg } from "../modal/logReg";
 import { ArticleUp } from "../modal/upArticle/addnewat";
-import './style.scss'
+import "./style.scss";
 export function Header(params) {
-  const [active, setActive]=useState(false)
-  const data =useSelector(todosSelector);
-  const none=()=>{}
+  const [active, setActive] = useState(false);
+  const data = useSelector(todosSelector);
+  const none = () => {};
   return (
     <header className="header_no_main">
       <nav className="header_no_main__nav">
@@ -22,15 +22,24 @@ export function Header(params) {
             />
           </NavLink>
         </div>
-        {params.create ? <button onClick={()=>setActive(true)} className="header_no_main__btn-putAd btn-hov01" >
-          Разместить объявление
-        </button>:none}
-        
-        <EntrProfile/>
-      </nav>
-      {data.user.id ?<ArticleUp active={active} setActive={setActive}/>:none}
-      
+        {params.create ? (
+          <button
+            onClick={() => setActive(true)}
+            className="header_no_main__btn-putAd btn-hov01"
+          >
+            Разместить объявление
+          </button>
+        ) : (
+          none
+        )}
 
+        <EntrProfile />
+      </nav>
+      {data.user.id ? (
+        <ArticleUp active={active} setActive={setActive} />
+      ) : (
+        none
+      )}
     </header>
   );
 }

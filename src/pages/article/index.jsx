@@ -12,7 +12,7 @@ import "./article.scss";
 
 export function Article() {
   const params = useParams();
-  const [cat,setCat]=useState(false)
+  const [cat, setCat] = useState(false);
 
   const [chek, setChek] = useState(false);
   const data = useSelector(todosSelector);
@@ -78,8 +78,10 @@ export function Article() {
                       {new Date(data.current.created_on).toUTCString()}
                     </p>
                     <p className="article__city">{data.current.user.city}</p>
-                      
-                    <a onClick={()=>setCat(true)} className="article__link">23 отзыва</a>
+
+                    <a onClick={() => setCat(true)} className="article__link">
+                      23 отзыва
+                    </a>
                     {/* <Commentsmodal active={cat} setActive={setCat} /> */}
                   </div>
                   <p className="article__price">{data.current.price} ₽</p>

@@ -67,7 +67,9 @@ export function SellerProfile() {
                     <div className="seller__right">
                       <h3 className="seller__title">{sel.name}</h3>
                       <p className="seller__city">{sel.city}</p>
-                      <p className="seller__inf">Продает товары с {sel.sells_from}</p>
+                      <p className="seller__inf">
+                        Продает товары с {sel.sells_from}
+                      </p>
 
                       <div className="seller__img-mob-block">
                         <div className="seller__img-mob">
