@@ -28,7 +28,6 @@ export function Article() {
   const data = useSelector(todosSelector);
   useEffect(() => {
     dispatch(certainCard({ id: params.id }));
-    console.log("ww");
   }, [dispatch]);
   if (!data.card) {
     return <p>Loading...</p>;
@@ -74,7 +73,7 @@ export function Article() {
               <div className="article__img-bar">
                 {data.card.images[0] ? (
                   data.card.images.map((element, id) => (
-                    <div className="article__img-bar-div">
+                    <div key={id} className="article__img-bar-div">
                       <img
                         key={id}
                         onClick={() => setImages(element["url"])}

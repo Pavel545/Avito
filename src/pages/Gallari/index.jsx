@@ -1,28 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-
 import { Logo } from "../../components/Logo";
 import "./style.scss";
-import { BASE_URL } from "../../components/constants/index";
 import { Card } from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { allCardGalleri } from "../../components/store/actions/creators/todo";
 import { todosSelector } from "../../components/store/selectors/todo";
+import { allCard } from "../../components/store/actions/thunk";
 
 export function Gallari() {
   const dispatch = useDispatch();
   const data = useSelector(todosSelector);
 
-  const allCard = () => async (dispatch) => {
-    console.log("Loading...");
-
-    try {
-      const { data } = await axios.get(`${BASE_URL}/ads`);
-      dispatch(allCardGalleri(data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
   const filter = useRef(null);
   const [mass, setMass] = useState(null);
   const [value, setValue] = useState("");
@@ -34,7 +22,6 @@ export function Gallari() {
     }
     setMass(data.all);
 
-    console.log(mass);
   }, [data,dispatch]);
   
   if (!data.all) {

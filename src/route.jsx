@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Article } from "./pages/Article";
 import { Gallari } from "./pages/Gallari";
+import { SellerProfile } from "./pages/Seller_profile";
 
 export const AppRoutes = () => {
 
@@ -9,6 +10,8 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Gallari />} />
       <Route path="/article/:id" element={<Article/>}/>
+      <Route path="/seller_profile/:id" element={<SellerProfile/>}/>
+
     </Routes>
   );
 };
